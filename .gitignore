@@ -1,0 +1,26 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv/
+
+.env
+
+.coverage
+
+# Markdown docs — excluded from push
+*.md
+
+# Test / coverage artifacts
+htmlcov/
+.pytest_cache/
+
+# Tooling
+.freebuff/
+
+.idea/

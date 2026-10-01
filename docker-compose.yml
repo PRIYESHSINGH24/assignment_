@@ -1,0 +1,46 @@
+services:
+  db:
+    image: postgres:18-alpine
+
+    environment:
+      POSTGRES_DB: healthcare_dev
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+
+    ports:
+      - "5432:5432"
+
+    volumes:
+      - postgres_data:/var/lib/postgresql
+
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d healthcare_dev"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  web:
+    build: .
+
+    environment:
+      DJANGO_SETTINGS_MODULE: config.settings.development
+      DEBUG: "True"
+      SECRET_KEY: insecure-secret-key-for-development
+      DATABASE_URL: postgresql://postgres:postgres@db:5432/healthcare_dev
+      ALLOWED_HOSTS: localhost,127.0.0.1,web
+
+    ports:
+      - "8000:8000"
+
+    depends_on:
+      db:
+        condition: service_healthy
+
+    volumes:
+      - .:/app
+
+    stdin_open: true
+    tty: true
+
+volumes:
+  postgres_data:

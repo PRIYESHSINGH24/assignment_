@@ -1,0 +1,35 @@
+[project]
+name = "django-task"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "daphne>=4.2.3",
+    "dj-database-url>=3.1.2",
+    "django>=6.1.1",
+    "django-cors-headers>=4.9.0",
+    "django-filter>=26.1",
+    "djangorestframework>=3.18.1",
+    "djangorestframework-simplejwt>=5.5.1",
+    "drf-spectacular>=0.30.0",
+    "psycopg>=3.3.6",
+    "pytest>=9.1.1",
+    "pytest-cov>=7.1.0",
+    "pytest-django>=4.8.0",
+    "python-decouple>=3.8",
+]
+
+[project.scripts]
+django-task = "django_task:main"
+
+[build-system]
+requires = ["uv_build>=0.12.18,<0.13.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+    "pytest-cov>=7.1.0",
+    "pytest-django>=4.14.0",
+]
